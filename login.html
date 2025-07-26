@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IAF Soldier Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: url('C:/Users/ketan/Downloads/jet.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      cursor: crosshair;
+      animation: bgFloat 20s ease-in-out infinite alternate;
+    }
+
+    /* Radar Wave Container */
+    .radar-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .radar-wave {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      border: 2px solid #00ffff66;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: radarPulse 4s infinite ease-out;
+      opacity: 0.6;
+    }
+
+    @keyframes radarPulse {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(10);
+        opacity: 0;
+      }
+    }
+
+    @keyframes bgFloat {
+        0% {
+             background-position: center 48%;
+        }
+        100% {
+            background-position: center 52%;
+        }
+    }
+
+    /* Login Card */
+    .login-card {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px;
+      width: 350px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      color: white;
+      z-index: 3;
+      position: relative;
+    }
+
+    .login-card h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 26px;
+      color: #00ffff;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #00ffffaa;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 12px;
+      left: 0;
+      pointer-events: none;
+      color: #aaa;
+      font-size: 16px;
+      transition: 0.3s ease all;
+    }
+
+    .form-group input:focus ~ label,
+    .form-group input:not(:placeholder-shown) ~ label {
+      top: -10px;
+      font-size: 12px;
+      color: #00ffff;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      border-radius: 30px;
+    }
+
+    .login-btn:hover {
+      background: #00ffff;
+      color: #000;
+      box-shadow: 0 0 15px #00ffffaa;
+    }
+
+    .footer-text {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    /* Shooting Star */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #fff;
+      animation: shoot 1s linear forwards;
+    }
+
+    @keyframes shoot {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(300px, -300px) scale(0.8);
+      }
+    }
+
+    /* Shockwave */
+    .shockwave {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border: 2px solid cyan;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: pulse 1.5s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.5);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(12);
+        opacity: 0;
+      }
+    }
+
+
+    @keyframes flyPlane {
+      0% {
+        left: -200px;
+        transform: scale(1) rotate(3deg);
+      }
+      50% {
+        top: 15vh;
+        transform: scale(1.1) rotate(-1deg);
+      }
+      100% {
+        left: 110%;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Radar Wave Effect -->
+  <div class="radar-container">
+    <div class="radar-wave"></div>
+    <div class="radar-wave" style="animation-delay: 2s;"></div>
+  </div>
+
+  <!-- Flying Jet -->
+  <div class="flying-plane"></div>
+
+  <!-- Login Card -->
+  <div class="login-card">
+    <h2>🪖 Soldier Training Access</h2>
+    <form>
+      <div class="form-group">
+        <input type="text" required placeholder=" " />
+        <label>Call Sign</label>
+      </div>
+      <div class="form-group">
+        <input type="password" required placeholder=" " />
+        <label>Passcode</label>
+      </div>
+      <button type="submit" class="login-btn">Engage</button>
+    </form>
+    <div class="footer-text">
+      Unauthorized access is punishable under Air Force Act.
+    </div>
+  </div>
+
+  <!-- Star + Shockwave on Click -->
+  <script>
+    document.body.addEventListener("click", function (e) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.left = e.clientX + "px";
+      star.style.top = e.clientY + "px";
+      document.body.appendChild(star);
+
+      const shock = document.createElement("div");
+      shock.classList.add("shockwave");
+      shock.style.left = e.clientX - 25 + "px";
+      shock.style.top = e.clientY - 25 + "px";
+      document.body.appendChild(shock);
+
+      setTimeout(() => {
+        star.remove();
+        shock.remove();
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
